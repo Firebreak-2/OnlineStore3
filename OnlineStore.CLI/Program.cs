@@ -1,6 +1,9 @@
 ﻿
 bool running = true;
+
+#if DEBUG
 Console.WriteLine("running...");
+#endif
 
 while (running)
 {
