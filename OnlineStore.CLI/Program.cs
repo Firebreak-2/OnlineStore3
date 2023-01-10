@@ -1,4 +1,5 @@
-﻿
+﻿using OnlineStore.Core;
+
 bool running = true;
 
 #if DEBUG
@@ -13,6 +14,18 @@ while (running)
         continue;
 
     string[] words = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-    
-    // run commands based on words
+
+    switch (words)
+    {
+        case ["host"]:
+        {
+            Store.Initialize(true, 9999);
+            break;
+        }
+        case ["client"]:
+        {
+            Store.Initialize(false, 9999);
+            break;
+        }
+    }
 }
