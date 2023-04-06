@@ -6,15 +6,18 @@ namespace OnlineStore.Core;
 
 public static class Store
 {
-    public static void Initialize(bool host, int port)
+    public static bool Running = false;
+    public static List<Socket> ClientList = new();
+
+    public static async Task Initialize(bool host, int port)
     {
-        if (host)
-            HostInit(port);
-        else
-            ClientInit(port);
+        Running = true;
+
+        if (host) await HostInit(port);
+        else await ClientInit(port);
     }
 
-    public static void ClientInit(int port)
+    public static async Task ClientInit(int port)
     {
         IPEndPoint ip = new(IPAddress.Parse("127.0.0.1"), port);
 
@@ -22,7 +25,7 @@ public static class Store
 
         try
         {
-            server.Connect(ip); //Connect to the server
+            await server.ConnectAsync(ip); //Connect to the server
         }
         catch (SocketException _)
         {
@@ -50,7 +53,7 @@ public static class Store
         server.Close();
     }
 
-    private static void HostInit(int port)
+    private static async Task HostInit(int port)
     {
         IPEndPoint ip = new(IPAddress.Any, port); //Any IPAddress that connects to the server on any port
         Socket socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); //Initialize a new Socket
@@ -58,25 +61,56 @@ public static class Store
         socket.Bind(ip); //Bind to the client's IP
         socket.Listen(10); //Listen for maximum 10 connections
         Console.WriteLine("Waiting for a client...");
-        Socket client = socket.Accept();
-        IPEndPoint? clientep = (IPEndPoint?) client.RemoteEndPoint;
 
-        Console.WriteLine($"Connected with {clientep?.Address} at port {clientep?.Port}");
+        ClientList.Add(socket.Accept());
 
-        const string responseData = "Welcome";
-        byte[] sendData = Encoding.ASCII.GetBytes(responseData);
-        client.Send(sendData, sendData.Length, SocketFlags.None);
-        
-        while (true)
+        foreach (Socket client in ClientList)
         {
-            byte[] data = new byte[1024];
-            int receivedDataLength = client.Receive(data); //Wait for the data
-            string stringData = Encoding.ASCII.GetString(data, 0, receivedDataLength); //Decode the data received
-            Console.WriteLine(stringData); //Write the data on the screen
+            IPEndPoint? clientep = (IPEndPoint?)client.RemoteEndPoint;
+
+            Console.WriteLine($"Connected with {clientep?.Address} at port {clientep?.Port}");
+
+            await client.SendAsync("Welcome"u8.ToArray(), SocketFlags.None);
+
+            while (Running)
+            {
+                byte[] data = new byte[1024];
+                int receivedDataLength = await client.ReceiveAsync(data); //Wait for the data
+                string? stringData = Encoding.ASCII.GetString(data, 0, receivedDataLength); //Decode the data received
+
+                if (stringData is null)
+                    break;
+
+                switch (stringData)
+                {
+                    case "clear":
+                        {
+                            Console.Clear();
+                            break;
+                        }
+                    case ['e', 'c', 'h', 'o', .. var args]:
+                        {
+                            Console.WriteLine(string.Join('\0', args));
+                            break;
+                        }
+                    case "bye":
+                        {
+                            Running = false;
+                            await client.SendAsync(data, SocketFlags.None);
+                            break;
+                        }
+                    default:
+                        {
+                            Console.WriteLine($"invalid request: {stringData}");
+                            break;
+                        }
+                }
+            }
+
+            Console.WriteLine($"Disconnected from {clientep?.Address}");
+            client.Close();
+            socket.Close();
+            ClientList.Clear();
         }
-        
-        Console.WriteLine($"Disconnected from {clientep?.Address}");
-        client.Close();
-        socket.Close();
     }
 }

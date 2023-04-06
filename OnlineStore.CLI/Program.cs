@@ -1,31 +1,44 @@
-﻿using OnlineStore.Core;
+﻿using System.Diagnostics;
+using AdvancedCommands;
+using OnlineStore.Core;
 
-bool running = true;
+namespace OnlineStore.CLI;
 
-#if DEBUG
-Console.WriteLine("running...");
-#endif
-
-while (running)
+public static class Program
 {
-    string? line = Console.ReadLine();
-
-    if (line is null or {Length: 0})
-        continue;
-
-    string[] words = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-    switch (words)
+    public static void Main(string[] args)
     {
-        case ["host"]:
+        CommandRunner runner = new();
+        runner.AddDefaultTypeInterpretters();
+        runner.AddCommandsUsingAttribute();
+        
+        #if DEBUG
+        Console.WriteLine("running...");
+        #endif
+
+        while (true)
         {
-            Store.Initialize(true, 9999);
-            break;
+            string line = Console.ReadLine() ?? "";
+
+            runner.Run(line).TryUse(Console.WriteLine, Console.WriteLine);
         }
-        case ["client"]:
-        {
-            Store.Initialize(false, 9999);
-            break;
-        }
+    }
+
+    [AdvancedCommand]
+    public static void Host()
+    { 
+        Task.Run(async () => await Store.Initialize(true, 1030)).GetAwaiter().GetResult();
+    }
+    
+    [AdvancedCommand]
+    public static void Client()
+    { 
+        Task.Run(async () => await Store.Initialize(false, 1030)).GetAwaiter().GetResult();
+    }
+
+    [AdvancedCommand]
+    public static void Exit()
+    {
+        Process.GetCurrentProcess().Kill();
     }
 }
