@@ -11,4 +11,10 @@
       <ProjectReference Include="..\OnlineStore.Core\OnlineStore.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="AdvancedCommands">
+        <HintPath>AdvancedCommands.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
