@@ -88,7 +88,8 @@ public static class Store
                             Console.Clear();
                             break;
                         }
-                    case ['e', 'c', 'h', 'o', .. var args]:
+                    // i love janky code !!!!!!
+                    case ['e', 'c', 'h', 'o', ' ', .. var args]:
                         {
                             Console.WriteLine(string.Join('\0', args));
                             break;
@@ -110,7 +111,8 @@ public static class Store
             Console.WriteLine($"Disconnected from {clientep?.Address}");
             client.Close();
             socket.Close();
-            ClientList.Clear();
         }
+
+        ClientList.Clear();
     }
 }
