@@ -17,7 +17,7 @@ public static class Store
         else await ClientInit(port);
     }
 
-    public static async Task ClientInit(int port)
+    private static async Task ClientInit(int port)
     {
         IPEndPoint ip = new(IPAddress.Parse("127.0.0.1"), port);
 
