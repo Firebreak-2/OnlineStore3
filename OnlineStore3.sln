@@ -6,6 +6,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Core", "OnlineS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.GUI", "OnlineStore.GUI\OnlineStore.GUI.csproj", "{CC8F9398-5E5A-4977-9DE3-0F50B6AD878D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deps", "Deps", "{2B637F8C-6BBF-4B41-82EF-AD0ABAA31958}"
+	ProjectSection(SolutionItems) = preProject
+		AdvancedCommands.dll = AdvancedCommands.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

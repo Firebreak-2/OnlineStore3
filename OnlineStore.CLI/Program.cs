@@ -6,11 +6,11 @@ namespace OnlineStore.CLI;
 
 public static class Program
 {
+    public static CommandRunner Runner = new();
     public static void Main(string[] args)
     {
-        CommandRunner runner = new();
-        runner.AddDefaultTypeInterpretters();
-        runner.AddCommandsUsingAttribute();
+        Runner.AddDefaultTypeInterpretters();
+        Runner.AddCommandsUsingAttribute();
         
         #if DEBUG
         Console.WriteLine("running...");
@@ -20,7 +20,7 @@ public static class Program
         {
             string line = Console.ReadLine() ?? "";
 
-            runner.Run(line).TryUse(Console.WriteLine, Console.WriteLine);
+            Runner.Run(line).TryUse(Console.WriteLine, Console.WriteLine);
         }
     }
 

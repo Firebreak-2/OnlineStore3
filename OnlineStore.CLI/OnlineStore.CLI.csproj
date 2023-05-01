@@ -13,7 +13,7 @@
 
     <ItemGroup>
       <Reference Include="AdvancedCommands">
-        <HintPath>AdvancedCommands.dll</HintPath>
+        <HintPath>../AdvancedCommands.dll</HintPath>
       </Reference>
     </ItemGroup>
 
