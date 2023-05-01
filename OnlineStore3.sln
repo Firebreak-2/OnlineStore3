@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.CLI", "OnlineStore.CLI\OnlineStore.CLI.csproj", "{DC1CE247-23A9-4A28-9256-B634A28506D6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Core", "OnlineStore.Core\OnlineStore.Core.csproj", "{885173CB-AE67-4708-B03A-A2E6706E2D4A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.GUI", "OnlineStore.GUI\OnlineStore.GUI.csproj", "{CC8F9398-5E5A-4977-9DE3-0F50B6AD878D}"
@@ -11,16 +9,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deps", "Deps", "{2B637F8C-6
 		AdvancedCommands.dll = AdvancedCommands.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Host.CLI", "OnlineStore.Host.CLI\OnlineStore.Host.CLI.csproj", "{ED85B046-8C25-45FF-AD8C-5C47173672E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Client.CLI", "OnlineStore.Client.CLI\OnlineStore.Client.CLI.csproj", "{2E2840F0-58F1-4767-9333-A8B148DE9EA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CLI", "CLI", "{69A6B064-8867-41EE-AD2F-CEC82475BEA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DC1CE247-23A9-4A28-9256-B634A28506D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC1CE247-23A9-4A28-9256-B634A28506D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC1CE247-23A9-4A28-9256-B634A28506D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC1CE247-23A9-4A28-9256-B634A28506D6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{885173CB-AE67-4708-B03A-A2E6706E2D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{885173CB-AE67-4708-B03A-A2E6706E2D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{885173CB-AE67-4708-B03A-A2E6706E2D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,5 +29,17 @@ Global
 		{CC8F9398-5E5A-4977-9DE3-0F50B6AD878D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC8F9398-5E5A-4977-9DE3-0F50B6AD878D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC8F9398-5E5A-4977-9DE3-0F50B6AD878D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED85B046-8C25-45FF-AD8C-5C47173672E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED85B046-8C25-45FF-AD8C-5C47173672E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED85B046-8C25-45FF-AD8C-5C47173672E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED85B046-8C25-45FF-AD8C-5C47173672E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E2840F0-58F1-4767-9333-A8B148DE9EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2840F0-58F1-4767-9333-A8B148DE9EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E2840F0-58F1-4767-9333-A8B148DE9EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E2840F0-58F1-4767-9333-A8B148DE9EA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED85B046-8C25-45FF-AD8C-5C47173672E7} = {69A6B064-8867-41EE-AD2F-CEC82475BEA0}
+		{2E2840F0-58F1-4767-9333-A8B148DE9EA4} = {69A6B064-8867-41EE-AD2F-CEC82475BEA0}
 	EndGlobalSection
 EndGlobal
