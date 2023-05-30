@@ -13,6 +13,6 @@ public static class Program
 
     public static void DoHost()
     { 
-        Task.Run(async () => await Store.Initialize(true, 1030)).GetAwaiter().GetResult();
+        Task.Run(async () => await Backend.SafeHostInit(1030)).GetAwaiter().GetResult();
     }
 }
