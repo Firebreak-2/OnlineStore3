@@ -136,7 +136,7 @@ public static class Backend
 
                     Shop.AccountBalances[buyerToken] -= itemsCost;
 
-                    Console.WriteLine($"[{connectionId}] BUYS {string.Join(", ", itemsToPurchase.Select(x => Shop.Items[x].Name))}");
+                    Console.WriteLine($"[{ClientConnections[connectionId].Username}] BUYS {string.Join(", ", itemsToPurchase.Select(x => Shop.Items[x].Name))}");
                     await client.SendAsync("OK"u8.ToArray(), SocketFlags.None);
                     Shop.SaveDatabase();
                     break;
